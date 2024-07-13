@@ -2,6 +2,7 @@ certifi==2024.7.4
 charset-normalizer==3.3.2
 contourpy==1.2.1
 cycler==0.12.1
+cv2filters==0.2.6
 filelock==3.15.4
 fonttools==4.53.1
 fsspec==2024.6.1
