@@ -29,7 +29,7 @@ class ANPR:
             )
             detected_plates.append((boxes, confidence))
 
-        if save_image:
+        if save_image and confidence:
             x1, y1, x2, y2 = boxes
             self.filters.crop_image(image, x1, y1, x2, y2)
 
