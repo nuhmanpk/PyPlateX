@@ -1,5 +1,5 @@
 import pathlib
-import setuptools
+from setuptools import setup, find_packages
 
 file = pathlib.Path(__file__).parent
 
@@ -7,7 +7,7 @@ README = (file / "README.md").read_text()
 
 requirements = (file / "requirements.txt").read_text().splitlines()
 
-setuptools.setup(
+setup(
     name="pyplatex",
     version="0.0.1",
     author="Nuhman Pk",
@@ -23,7 +23,7 @@ setuptools.setup(
         "Operating System :: OS Independent",
     ],
     install_requires=requirements,
-    packages=setuptools.find_packages(include=['pyplatex']),
+    packages=find_packages(),
     python_requires=">=3.9",
     project_urls={
         'Documentation': 'https://github.com/nuhmanpk/pyplatex/blob/main/README.md',
