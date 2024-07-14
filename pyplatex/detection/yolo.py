@@ -7,17 +7,19 @@ from ultralytics import YOLO
 import numpy as np
 from PIL import Image
 from cv2filters import Filters
+from pyplatex.ocr import OCR
 
 class ANPR:
     def __init__(self):
         self.model = YOLO(DETECTION_BASE_MODEL)
         self.filters = Filters()
+        self.ocr = OCR()  # Initialize OCR
 
     async def load_image(self, image_path):
         loop = asyncio.get_event_loop()
         return await loop.run_in_executor(None, Image.open, image_path)
 
-    async def detect(self, image_path, max_detections=1, confidence=0.6, save_image=False, padding=5, folder_name=None):
+    async def detect(self, image_path, max_detections=1, confidence=0.6, save_image=False, padding=5, folder_name=None, use_ocr=True):
         # Load and preprocess the image
         image = await self.load_image(image_path)
         image = image.convert("RGB")
@@ -30,7 +32,9 @@ class ANPR:
         output_info = {
             "detected": False,
             "confidence": 0,
-            "saved_path": None
+            "saved_path": None,
+            "image_tensor": None,
+            "recognized_plate": None
         }
 
         for result in results:
@@ -63,8 +67,12 @@ class ANPR:
             cropped_image = image[y1:y2, x1:x2]
 
             await asyncio.to_thread(cv2.imwrite, output_path, cropped_image)
+            output_info["image_tensor"] = cropped_image
+            output_info["saved_path"] = output_path 
 
-            output_info["saved_path"] = output_path  # Save the file path
+            # Perform OCR if enabled
+            if use_ocr:
+                recognized_plate = self.ocr.recognize_plate(cropped_image)
+                output_info["recognized_plate"] = recognized_plate
 
-        return output_info 
-
+        return output_info
