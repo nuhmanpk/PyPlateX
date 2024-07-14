@@ -22,6 +22,10 @@ setup(
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
     ],
+    packages=find_packages(),
+        package_data={
+        'pyplatex.models': ['plate-detection-models/*.pt'],  # Include all .pt files 
+    },
     install_requires=requirements,
     packages=find_packages(),
     python_requires=">=3.9",
