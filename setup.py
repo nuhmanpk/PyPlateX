@@ -27,7 +27,6 @@ setup(
         'pyplatex.models': ['plate-detection-models/*.pt'],  # Include all .pt files 
     },
     install_requires=requirements,
-    packages=find_packages(),
     python_requires=">=3.9",
     project_urls={
         'Documentation': 'https://github.com/nuhmanpk/pyplatex/blob/main/README.md',
