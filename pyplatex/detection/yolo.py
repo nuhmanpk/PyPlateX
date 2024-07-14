@@ -19,7 +19,7 @@ class ANPR:
         loop = asyncio.get_event_loop()
         return await loop.run_in_executor(None, Image.open, image_path)
 
-    async def detect(self, image_path, max_detections=1, confidence=0.6, save_image=False, padding=5, folder_name=None, use_ocr=True):
+    async def detect(self, image_path, max_detections=1, confidence=0.6, save_image=False, padding=5, folder_name=None, use_ocr=False):
         # Load and preprocess the image
         image = await self.load_image(image_path)
         image = image.convert("RGB")
