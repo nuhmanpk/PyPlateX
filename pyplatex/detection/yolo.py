@@ -1,4 +1,4 @@
-from pyplatex.models.base_model import DETECTION_BASE_MODEL
+from pyplatex.models import DETECTION_BASE_MODEL
 from ultralytics import YOLO
 import numpy as np
 from PIL import Image

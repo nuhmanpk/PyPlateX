@@ -1,0 +1,1 @@
+from .base_model import DETECTION_BASE_MODEL
