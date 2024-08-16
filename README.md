@@ -11,6 +11,17 @@ A scalable and versatile ANPR package leveraging YOLO for detection and multiple
 ![PyPI - Format](https://img.shields.io/pypi/format/pyplatex)
 
 ## Simple ready to use ANPR 
+
+**Note: The ANPR.detect function is asynchronous, so ensure you use the await keyword when calling it within an async function.**
+
+```py
+from pyplatex import ANPR
+anpr = ANPR()
+det = await anpr.detect('/content/Car plate 24622490.jpg',save_image=True)
+print(det)
+```
+or
+
 ```py
 
 from pyplatex import ANPR
@@ -25,15 +36,33 @@ async def main():
 asyncio.run(main())
 
 ```
-the output will be like
+the output would be like
 
-```json
-    {
-        'detected': True, 
-        'confidence': array(    0.74661, dtype=float32), 
-        'saved_path': 'detected_plates/cropped_plate_20240714_145500.jpg'
-    }
+```
+{
+    'detected': True, 
+    'confidence': array(    0.74661, dtype=float32), 
+    'saved_path': 'detected_plates/cropped_plate_20240714_145500.jpg'
+}
 ```
 
+
+### Dev TODO:
+- [x] Release a Inital Version
+- [x] Add a plate detection model
+- [x] Read and detect Plates
+- [x] Format output
+- [x] Integrate Cv2filters
+- [ ] Change Cofidence to a round number
+- [ ] Add a option to accept image as Tensor / numpy array
+- [ ] Add a ocr Model
+- [ ] Add auto filters tag
+- [ ] Add More custom filters
+<!-- [ ] -->
+
+
+
 ### NOTE
-Still cooking in the kitchen—don’t worry, we’ll let you know when it’s done and ready to serve! 🍳
+Still cooking in the kitchen—don’t worry, we’ll let you know when it’s done and ready to serve! 🍳 
+
+Happy Coding 🚀 ...
