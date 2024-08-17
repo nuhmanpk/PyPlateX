@@ -56,6 +56,20 @@ the output would be like
     'plate_number_confidence': 1.0
 }
 ```
+## Args for anpr.detect()
+
+| Parameter        | Default Value | Description                                                                                   |
+|------------------|---------------|-----------------------------------------------------------------------------------------------|
+| `image_path`     | None          | Path to the image file to be processed.                                                       |
+| `max_detections` | 1             | Maximum number of license plates to detect in the image.                                       |
+| `confidence`     | 0.6           | Confidence threshold for detecting a license plate. Only detections with confidence above this value will be considered. |
+| `save_image`     | False         | If True, the detected plate image will be saved to disk.                                        |
+| `padding`        | 5             | Padding around the detected license plate when saving the image.                              |
+| `folder_name`    | None          | Directory name where the detected images will be saved. If `save_image` is True, this folder will be created if it does not exist. |
+| `use_ocr`        | True          | If True, Optical Character Recognition (OCR) will be performed on the detected license plates. |
+| `return_tensor`  | False         | If True, returns the image tensor of the detected license plates.                              |
+| `verbose`        | True          | If True, logs detailed information during processing.                                          |
+
 
 
 ### Dev TODO:
