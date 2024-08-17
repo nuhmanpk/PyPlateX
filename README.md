@@ -49,20 +49,12 @@ the output would be like
 <img src='./demo/plate-1.jpg' width=500px height=350px />
 
 ```
-<<<<<<< HEAD
     {
         'is_plate': True, 
         'is_plate_confidence': 0.78, 
         'plate_number': 'MUN389', 
         'plate_number_confidence': 1.0
     }
-=======
-{
-    'is_plate': True, 'is_plate_confidence': 0.75, 
-    'plate_number': 'HR 26D05551', 
-    'plate_number_confidence': 0.78
-}
->>>>>>> 20a08abe67361096a0815373d9062a8d86c2e4f7
 ```
 
 
