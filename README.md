@@ -1,5 +1,7 @@
 # PyPlateX
-A scalable and versatile ANPR package leveraging YOLO for detection and multiple OCR options to accurately recognize license plates.
+High-Performance Scalable ANPR Package: Ready-to-Use, Simple, and Efficient License Plate Recognition
+
+Unlock top-tier accuracy and scalability with our cutting-edge ANPR solution **in 3 line of code**. Designed for seamless integration and ease of use, it delivers robust performance and reliability for all your license plate recognition needs.
 
 
 [![Downloads](https://static.pepy.tech/personalized-badge/pyplatex?period=total&units=abbreviation&left_color=grey&right_color=yellow&left_text=Total-Downloads)](https://pepy.tech/project/pyplatex)
@@ -14,10 +16,16 @@ A scalable and versatile ANPR package leveraging YOLO for detection and multiple
 
 **Note: The ANPR.detect function is asynchronous, so ensure you use the await keyword when calling it within an async function.**
 
+### Install from pypi.org
+
+```sh
+pip install pyplatex
+```
+
 ```py
 from pyplatex import ANPR
 anpr = ANPR()
-det = await anpr.detect('/content/Car plate 24622490.jpg',save_image=True)
+det = await anpr.detect('./demo/plate-1.jpg')
 print(det)
 ```
 or
@@ -29,7 +37,7 @@ import asyncio
 
 async def main():
     anpr = ANPR()
-    plates = await anpr.detect('./typesofcarnumberplates-02-01.jpg', save_image=True)
+    plates = await anpr.detect('./demo/plate-1.jpg')
     print(plates)
 
 # Run the async main function
@@ -38,12 +46,23 @@ asyncio.run(main())
 ```
 the output would be like
 
+<img src='./demo/plate-1.jpg' width=500px height=350px />
+
 ```
+<<<<<<< HEAD
+    {
+        'is_plate': True, 
+        'is_plate_confidence': 0.78, 
+        'plate_number': 'MUN389', 
+        'plate_number_confidence': 1.0
+    }
+=======
 {
     'is_plate': True, 'is_plate_confidence': 0.75, 
     'plate_number': 'HR 26D05551', 
     'plate_number_confidence': 0.78
 }
+>>>>>>> 20a08abe67361096a0815373d9062a8d86c2e4f7
 ```
 
 
@@ -54,15 +73,14 @@ the output would be like
 - [x] Format output
 - [x] Integrate Cv2filters
 - [x] Change Cofidence to a round number
-- [ ] Add a option to accept image as Tensor / numpy array
 - [x] Add a ocr Model
+- [x] Release a Initial Version
+- [ ] Add a option to accept image as Tensor / numpy array
 - [ ] Add auto filters tag
-- [ ] Add More custom filters
 <!-- [ ] -->
 
+**This is a pre-release version; there might be some bugs. If you encounter any issues or performance-related problems, please report them [here](https://github.com/nuhmanpk/pyplatex/issues). If you'd like to contribute to this project, you can create a pull request [here](https://github.com/nuhmanpk/pyplatex/pulls).**
 
-
-### NOTE
-Still cooking in the kitchen—don’t worry, we’ll let you know when it’s done and ready to serve! 🍳 
+**Warning: Use this pre-release with caution as it may still have unresolved issues.**
 
 Happy Coding 🚀 ...
