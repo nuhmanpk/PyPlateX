@@ -46,7 +46,7 @@ asyncio.run(main())
 ```
 the output would be like
 
-<img src='./demo/plate-1.jpg' width=500px height=350px />
+![https://github.com/nuhmanpk](./demo/plate-1.jpg)
 
 ```
 {
