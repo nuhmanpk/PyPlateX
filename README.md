@@ -40,9 +40,9 @@ the output would be like
 
 ```
 {
-    'detected': True, 
-    'confidence': array(    0.74661, dtype=float32), 
-    'saved_path': 'detected_plates/cropped_plate_20240714_145500.jpg'
+    'is_plate': True, 'is_plate_confidence': 0.75, 
+    'plate_number': '4 IND 26D05551 AR7', 
+    'plate_number_confidence': 0.75
 }
 ```
 
@@ -53,9 +53,9 @@ the output would be like
 - [x] Read and detect Plates
 - [x] Format output
 - [x] Integrate Cv2filters
-- [ ] Change Cofidence to a round number
+- [x] Change Cofidence to a round number
 - [ ] Add a option to accept image as Tensor / numpy array
-- [ ] Add a ocr Model
+- [x] Add a ocr Model
 - [ ] Add auto filters tag
 - [ ] Add More custom filters
 <!-- [ ] -->
