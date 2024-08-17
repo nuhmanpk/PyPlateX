@@ -41,8 +41,8 @@ the output would be like
 ```
 {
     'is_plate': True, 'is_plate_confidence': 0.75, 
-    'plate_number': '4 IND 26D05551 AR7', 
-    'plate_number_confidence': 0.75
+    'plate_number': 'HR 26D05551', 
+    'plate_number_confidence': 0.78
 }
 ```
 
