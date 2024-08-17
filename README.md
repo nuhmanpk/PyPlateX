@@ -1,7 +1,7 @@
 # PyPlateX
 High-Performance Scalable ANPR Package: Ready-to-Use, Simple, and Efficient License Plate Recognition
 
-Unlock top-tier accuracy and scalability with our cutting-edge ANPR solution **in 3 line of code**. Designed for seamless integration and ease of use, it delivers robust performance and reliability for all your license plate recognition needs.
+Unlock top-tier accuracy and scalability with cutting-edge ANPR solution **in 3 line of code**. Designed for seamless integration and ease of use, it delivers robust performance and reliability for all your license plate recognition needs.
 
 
 [![Downloads](https://static.pepy.tech/personalized-badge/pyplatex?period=total&units=abbreviation&left_color=grey&right_color=yellow&left_text=Total-Downloads)](https://pepy.tech/project/pyplatex)
