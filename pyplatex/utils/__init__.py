@@ -1,5 +1,7 @@
 import numpy as np
 import re
+from loguru import logger
+import sys
 
 def format_plate_number(recognized_plate):
     if not recognized_plate or not recognized_plate.pages:
@@ -40,4 +42,23 @@ def format_plate_number(recognized_plate):
     plate_number = re.sub(r'[\- ]{2,}', ' ', plate_number)  # Replace multiple dashes or spaces with a single space
 
     return plate_number, average_confidence
+    
+
+
+def log(message, level="info"):
+    # Remove any previous handlers to avoid duplicate logs
+    logger.remove()
+    
+    logger.add(sys.stdout, level=level.upper(), format="{time:YYYY-MM-DD at HH:mm:ss} | {level} | {message}")
+
+    if level.lower() == "info":
+        logger.info(message)
+    elif level.lower() == "error":
+        logger.error(message)
+    elif level.lower() == "warning":
+        logger.warning(message)
+    elif level.lower() == "debug":
+        logger.debug(message)
+    else:
+        logger.info(message)
     

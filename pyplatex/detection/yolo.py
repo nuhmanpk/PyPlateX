@@ -8,7 +8,7 @@ import numpy as np
 from PIL import Image
 from cv2filters import Filters
 from pyplatex.ocr import OCR
-
+from pyplatex.utils import log
 
 class ANPR:
     def __init__(self):
@@ -18,7 +18,14 @@ class ANPR:
 
     async def load_image(self, image_path):
         loop = asyncio.get_event_loop()
-        return await loop.run_in_executor(None, Image.open, image_path)
+        try:
+            return await loop.run_in_executor(None, Image.open, image_path)
+        except IsADirectoryError:
+            log(f"Failed to load image: {image_path} is a directory, not a file.",'error')
+            return None
+        except Exception as e:
+            log(f"An unexpected error occurred while loading image: {e}",'error')
+            return None
 
     async def detect(
         self,
@@ -29,16 +36,22 @@ class ANPR:
         padding=5,
         folder_name=None,
         use_ocr=True,
-        return_tensor=False
+        return_tensor=False,
+        verbose = True
     ):
         # Load and preprocess the image
+        if verbose : log('Initializing PyplateX ANPR package...','info')
         image = await self.load_image(image_path)
+
+        if image is None:
+            return None
         image = image.convert("RGB")
         image = np.array(image)
 
         # Predict
+        if verbose : log('Detecting license plate in the image...','info')
         results = await asyncio.to_thread(
-            self.model.predict, source=image, max_det=max_detections, conf=confidence
+            self.model.predict, source=image, max_det=max_detections, conf=confidence, verbose=False
         )
 
         detected_plates = []
@@ -47,15 +60,28 @@ class ANPR:
         }
 
         for result in results:
-            boxes = result.boxes.xyxy[0].numpy() if result.boxes else []
-            conf = result.boxes.conf[0].numpy() if len(
-                result.boxes.conf) > 0 else 0
+            if result.boxes and len(result.boxes) > 0:
+                boxes = result.boxes.xyxy[0].numpy() if result.boxes else np.array([])
+                conf = result.boxes.conf[0].numpy() if len(result.boxes.conf) > 0 else 0
 
-            if boxes.size > 0:
-                detected_plates.append((boxes, conf))
-                output_info["is_plate"] = True
-                output_info["is_plate_confidence"] = conf = round(
-                    float(conf), 2)
+                if boxes.size > 0:  # Check if the array has any elements
+                    detected_plates.append((boxes, conf))
+                    output_info["is_plate"] = True
+                    output_info["is_plate_confidence"] = round(float(conf), 2)
+                else:
+                    output_info["is_plate"] = False
+                    output_info["is_plate_confidence"] = 0.0
+                    return output_info
+            else:
+                output_info["is_plate"] = False
+                output_info["is_plate_confidence"] = 0.0
+                return output_info
+
+        if not conf:
+            output_info["is_plate"] = False
+            output_info["is_plate_confidence"] = 0.0
+            return output_info
+
 
         if save_image and detected_plates:
             # Set folder name
@@ -85,6 +111,7 @@ class ANPR:
 
         # Perform OCR if enabled
         if use_ocr:
+            if verbose : log('Initializing OCR model for text recognition...','info')
             if not save_image and detected_plates:
                 cache_folder = ".pyplatexCache"
                 if not os.path.exists(cache_folder):
@@ -101,7 +128,8 @@ class ANPR:
                 y2 = min(image.shape[0], int(y2) + padding)
                 cropped_image = image[y1:y2, x1:x2]
                 await asyncio.to_thread(cv2.imwrite, output_path, cropped_image)
-
+                
+            if verbose : log('Detecting text from license plate...','info')
             plate_number, plate_number_confidence = await self.ocr.recognize_plate(output_path)
             output_info["plate_number"] = plate_number
             output_info["plate_number_confidence"] = plate_number_confidence
