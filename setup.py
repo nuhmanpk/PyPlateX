@@ -9,12 +9,12 @@ requirements = (file / "requirements.txt").read_text().splitlines()
 
 setup(
     name="pyplatex",
-    version="0.0.4",
+    version="0.0.5",
     author="Nuhman Pk",
     author_email="nuhmanpk7@gmail.com",
     long_description = README,
     long_description_content_type = "text/markdown",
-    description="A scalable and versatile ANPR package leveraging YOLO for detection and multiple OCR options to accurately recognize license plates.",
+    description="A high-performance, scalable, and ready-to-use Automatic Number Plate Recognition (ANPR) package.",
     license="MIT",
     url="https://github.com/nuhmanpk/pyplatex",
     classifiers=[
