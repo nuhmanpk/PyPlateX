@@ -46,7 +46,7 @@ asyncio.run(main())
 ```
 the output would be like
 
-![https://github.com/nuhmanpk](./demo/plate-1.jpg)
+![https://github.com/nuhmanpk/pyplatex](https://raw.githubusercontent.com/nuhmanpk/PyPlateX/main/demo/plate-1.jpg)
 
 ```
 {
