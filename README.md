@@ -89,4 +89,6 @@ the output would be like
 
 **Warning: Use this pre-release with caution as it may still have unresolved issues.**
 
+If you like this project, please consider giving it a star on [Github](https://github.com/nuhmanpk/pyplatex)! Your support is appreciated. If you want to contribute further, you can also sponsor the project through [GitHub Sponsors](https://github.com/sponsors/nuhmanpk). Every contribution helps improve and maintain the project for the community.
+
 Happy Coding 🚀 ...
