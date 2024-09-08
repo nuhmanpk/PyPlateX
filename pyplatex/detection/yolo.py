@@ -1,18 +1,20 @@
-import os
-import asyncio
-import cv2
-from datetime import datetime
-from pyplatex.models import DETECTION_BASE_MODEL
-from ultralytics import YOLO
-import numpy as np
-from PIL import Image
 from cv2filters import Filters
+from datetime import datetime
+from PIL import Image
+from pyplatex.models import DETECTION_BEST_MODEL
 from pyplatex.ocr import OCR
 from pyplatex.utils import log
+from ultralytics import YOLO
+import asyncio
+import cv2
+import numpy as np
+import os
+import tempfile
+import secrets
 
 class ANPR:
     def __init__(self):
-        self.model = YOLO(DETECTION_BASE_MODEL)
+        self.model = YOLO(DETECTION_BEST_MODEL)
         self.filters = Filters()
         self.ocr = OCR()
 
@@ -113,14 +115,13 @@ class ANPR:
         if use_ocr:
             if verbose : log('Initializing OCR model for text recognition...','info')
             if not save_image and detected_plates:
-                cache_folder = ".pyplatexCache"
-                if not os.path.exists(cache_folder):
-                    os.makedirs(cache_folder)
-                # Create unique cache_folder path
-                timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-                output_path = os.path.join(
-                    cache_folder, f"cropped_plate_{timestamp}.jpg"
-                )
+                # Use the system's temporary directory
+                cache_folder = tempfile.gettempdir()
+
+
+                random_str = secrets.token_hex(8)
+                output_path = os.path.join(cache_folder, f"cropped_plate_{random_str}.jpg")
+
                 x1, y1, x2, y2 = boxes
                 x1 = max(0, int(x1) - padding)
                 y1 = max(0, int(y1) - padding)

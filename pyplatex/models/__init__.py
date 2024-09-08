@@ -1,1 +1,1 @@
-from .base_model import DETECTION_BASE_MODEL
+from .base_model import DETECTION_BASE_MODEL, DETECTION_BEST_MODEL

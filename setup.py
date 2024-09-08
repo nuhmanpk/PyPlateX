@@ -9,7 +9,7 @@ requirements = (file / "requirements.txt").read_text().splitlines()
 
 setup(
     name="pyplatex",
-    version="0.0.5",
+    version="0.0.6",
     author="Nuhman Pk",
     author_email="nuhmanpk7@gmail.com",
     long_description = README,
